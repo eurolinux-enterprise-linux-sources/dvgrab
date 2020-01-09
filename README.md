@@ -1,3 +1,4 @@
-# ELS - Enterprise Linux/EuroLinux Sources - dvgrab 
+# ELS - Enterprise Linux/EuroLinux Sources - dvgrab
+ 
 ## Usage:
-  Checkout branch or tag.
+  Checkout branch or tag. Use `make sources` to recreate  SOURCE0 archive.

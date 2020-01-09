@@ -1,0 +1,41 @@
+--- dvgrab-3.5/filehandler.cc.orig	2013-11-06 15:45:54.000000000 -0500
++++ dvgrab-3.5/filehandler.cc	2013-11-06 15:45:57.000000000 -0500
+@@ -639,6 +639,12 @@ AVIHandler::~AVIHandler()
+ 	Close();
+ }
+ 
++static DWORD pack_to_dword(Pack *p) {
++	DWORD ret;
++
++	ret = p->data[1] | ((DWORD)p->data[2]<<8) | ((DWORD)p->data[3]<<16) | ((DWORD)p->data[4]<<24);
++	return ret;
++}
+ 
+ void AVIHandler::SetSampleFrame( DVFrame *sample )
+ {
+@@ -648,19 +654,19 @@ void AVIHandler::SetSampleFrame( DVFrame
+ 	sample->GetVideoInfo( videoInfo );
+ 
+ 	sample->GetAAUXPack( 0x50, pack );
+-	dvinfo.dwDVAAuxSrc = *( DWORD* ) ( pack.data + 1 );
++	dvinfo.dwDVAAuxSrc = pack_to_dword(&pack);
+ 	sample->GetAAUXPack( 0x51, pack );
+-	dvinfo.dwDVAAuxCtl = *( DWORD* ) ( pack.data + 1 );
++	dvinfo.dwDVAAuxCtl = pack_to_dword(&pack);
+ 
+ 	sample->GetAAUXPack( 0x52, pack );
+-	dvinfo.dwDVAAuxSrc1 = *( DWORD* ) ( pack.data + 1 );
++	dvinfo.dwDVAAuxSrc1 = pack_to_dword(&pack);
+ 	sample->GetAAUXPack( 0x53, pack );
+-	dvinfo.dwDVAAuxCtl1 = *( DWORD* ) ( pack.data + 1 );
++	dvinfo.dwDVAAuxCtl1 = pack_to_dword(&pack);
+ 
+ 	sample->GetVAUXPack( 0x60, pack );
+-	dvinfo.dwDVVAuxSrc = *( DWORD* ) ( pack.data + 1 );
++	dvinfo.dwDVVAuxSrc = pack_to_dword(&pack);
+ 	sample->GetVAUXPack( 0x61, pack );
+-	dvinfo.dwDVVAuxCtl = *( DWORD* ) ( pack.data + 1 );
++	dvinfo.dwDVVAuxCtl = pack_to_dword(&pack);
+ 
+ #ifdef WITH_LIBDV
+ 
