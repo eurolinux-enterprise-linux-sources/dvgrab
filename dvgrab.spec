@@ -1,7 +1,7 @@
 Summary:        Utility to capture video from a DV camera
 Name:           dvgrab
 Version:        3.5
-Release:        9%{?dist}
+Release:        8.1%{?dist}
 License:        GPLv2+
 Group:          Applications/Multimedia
 URL:            http://www.kinodv.org/
@@ -38,9 +38,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/dvgrab.1*
 
 %changelog
-* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 3.5-9
-- Mass rebuild 2013-12-27
-
 * Wed Nov 6 2013 Jay Fenlason <fenlason@redhat.com> - 3.5-8.1
 - Add a patch to shut up some compiler warnings.  (and not segfault on
   machines that can't do unaligned accesses)
